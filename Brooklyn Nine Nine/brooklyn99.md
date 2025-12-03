@@ -22,6 +22,7 @@ nmap -sC -sV <Target IP>
 The output revealed useful information about the services running on the target.
 
 ![We can see ftp, ssh and apache running](media/nmap.png)
+*We can see ftp, ssh and apache running*
 
 I decided to go the apache route and opened the target ip in my browser.
 
@@ -123,7 +124,7 @@ stegcracker brooklyn99.jpg /usr/share/wordlists/rockyou.txt
 
 ## Method 2
 
-![Nmap showing port 21 with FTP open](media/nmap.jpg)
+![Nmap showing port 21 with FTP open](media/nmap.png)
 
 ![I logged anonymously, without a password.](media/ftp-anon-login.png)
 
