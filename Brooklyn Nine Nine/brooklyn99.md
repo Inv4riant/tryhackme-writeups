@@ -24,7 +24,7 @@ The output revealed useful information about the services running on the target.
 
 ![](media/nmap.png)
 
-We can see ftp, ssh and apache running.
+The scan shows FTP, SSH, and HTTP open ports.
 
 I decided to go the apache route and opened the Target IP in my browser.
 
