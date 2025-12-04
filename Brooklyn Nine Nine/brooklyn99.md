@@ -159,7 +159,7 @@ stegcracker brooklyn99.jpg /usr/share/wordlists/rockyou.txt
 
 ![](media/nmap.jpg)
 
-Nmap showing port 21 with FTP open and anonymous login allowed.
+Nmap showed port 21 with FTP open and anonymous login allowed.
 
 ![](media/ftp-anon-login.png)
 
