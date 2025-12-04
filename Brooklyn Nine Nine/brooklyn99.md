@@ -193,7 +193,7 @@ I was then able to log in as jake and list his permissions.
 
 ![](media/jake-login-sudo-l.png)
 
-Jake can run the `less` command with `sudo`.
+Jake can run the `less` command as `sudo`.
 
 According to [GTFOBins](https://gtfobins.github.io/),this can be abused to escalate privileges.
 
