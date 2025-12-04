@@ -122,11 +122,11 @@ Documenting both approaches highlights the difference between “getting lucky�
 
 I replicated the scenario in a home lab to understand how limited `/bin/nano` privileges could be abused.
 
-It was during this process that I realized the 'sudoers' file had been available all along. 
+It was during this process that I realized the `sudoers` file had been available all along. 
 
 The escalation path was clear.
 
-I opened the sudoers file using nano and modified it to grant myself full permissions.
+I opened the `/etc/sudoers` file using nano and modified it to grant myself full permissions.
 
 ![](media/sudoers-edited.png)
 
@@ -155,7 +155,7 @@ stegcracker brooklyn99.jpg /usr/share/wordlists/rockyou.txt
 
 ![](media/stegcracker.png)
 
-Stegcracker was not available on the THM machine, so I couldn’t brute force the password like I had done on my home lab.
+Stegcracker was not available on the THM machine, so I didn’t brute force the password like I had done on my home lab.
 
 ---
 
