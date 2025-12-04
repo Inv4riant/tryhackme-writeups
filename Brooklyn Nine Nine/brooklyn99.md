@@ -26,7 +26,7 @@ The output revealed useful information about the services running on the target.
 
 The scan shows FTP, SSH, and HTTP open ports.
 
-I decided to go the apache route and opened the Target IP in my browser.
+I decided to go the HTTP service route and opened the Target IP in my browser.
 
 ![](media/webpage.png)
 
