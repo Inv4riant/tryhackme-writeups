@@ -14,9 +14,9 @@ The objective of this room is to exploit a web vulnerability to gain access to t
 
 I began by entering the Target IP into my web browser as instructed.
 
-![](media/login.png)
-
 This brought up a simple login page.
+
+![](media/login.png)
 
 With little information available on the website I opened the browser's inspect mode and got a clue.
 
@@ -49,3 +49,4 @@ The exercise reinforces the importance of:
 - Validating and sanitizing user input.
 
 - Enforcing proper access control.
+
