@@ -20,9 +20,9 @@ This brought up a simple login page.
 
 As the website instructed, I opened the browser's inspect mode and got a clue.
 
-![](media/guest-creds.png)
-
 Guest credentials were exposed in an HTML comment.
+
+![](media/guest-creds.png)
 
 Using them, I looged in as guest.
 
@@ -49,6 +49,7 @@ The exercise reinforces the importance of:
 - Validating and sanitizing user input.
 
 - Enforcing proper access control.
+
 
 
 
