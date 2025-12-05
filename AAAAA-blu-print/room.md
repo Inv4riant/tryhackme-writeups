@@ -16,10 +16,11 @@ The objective is
 
 ## Final Notes
 
-This room highlights several common misconfigurations and weaknesses:
+This room highlights the following misconfigurations and/or weaknesses:
 
 - 
 
-The exercise reinforces the importance of:
+And reinforces the importance of:
+
 
 - 
