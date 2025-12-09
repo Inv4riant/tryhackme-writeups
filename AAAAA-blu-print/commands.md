@@ -9,6 +9,8 @@
 ```
 > dir - the classic directory brute-forcing mode
 
+>-u, --url string  
+
 > -w, --wordlist string
 
 ---
@@ -90,3 +92,4 @@
 
 ```
 >Syntax: wget [option]... [URL]...
+
