@@ -22,7 +22,7 @@ I needed a username and password to log in, and my attempts with default credent
 
 ![](media/login.png)
 
-I decided to run a gobuster scan to look for hidden directories that might provide aditional clues:
+I decided to run a gobuster scan to look for hidden directories that might provide additional clues:
 
 ```bash
 gobuster dir -u http://<Target IP> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
@@ -54,5 +54,6 @@ Entering these credentials into the login form yielded the flag.
 
 - Hardcoded credentials in source code.
 - Exposed directories.
+
 
 
