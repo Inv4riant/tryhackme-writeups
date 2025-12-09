@@ -16,11 +16,6 @@ The objective is
 
 ## Final Notes
 
-This room highlights the following misconfigurations and/or weaknesses:
-
-- 
-
-And reinforces the importance of:
-
+#### This room highlights the following misconfigurations and/or weaknesses:
 
 - 
