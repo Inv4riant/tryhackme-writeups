@@ -8,7 +8,7 @@ The objective of this room is to gain root access to a machine by using enumerat
 
 ## Setup
 - **Tools used:** `nmap`, `enum4linux`, `netcat`, `searchploit`
-- **Techniques:** SMB share enumeration, ProFTPD mod_copy abuse, path hijacking
+- **Techniques:** SMB share enumeration, ProFTPD mod_copy abuse, path hijacking.
 - **Notes:** This room is structured as a walkthrough, but I documented my own process, including alternative commands that achieve the same results. All answers are redacted.
 
 ---
@@ -27,13 +27,13 @@ nmap <Target IP>
 
 ### Task 2 - Enumerating Samba
 
-From the port scan results, the target is running an SMB service. The room suggests enumerating the available shares using the following nmap script:
+The scan confirms the presence of an SMB service on the target, and the room suggests enumerating the available shares using the following nmap script:
 
 ```bash
 nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse <Target IP>
 ```
 
-But instead, i used `enum4linux`.
+But instead, I used `enum4linux`.
 
 ```bash
 enum4linux -S <Target IP>
@@ -45,7 +45,9 @@ This produced the following output:
 
 ![media](media/03.png)
 
-The scan shows that the user `anonymous` is allowed to authenticate without a password. The next step is to connect to the share:
+The scan shows that the user `anonymous` is allowed to authenticate without a password.
+
+The next step is to connect to the share:
 
 ```bash
 smbclient //<Target IP>/anonymous
@@ -55,17 +57,15 @@ Authentication succeeds, and the files on the share can be listed.
 
 ![media](media/04.png)
 
-The room then downloads the contents of the share recursively using:
+The contents of the share can be downloaded recursively using:
 
 ```bash
 smbget -R smb://<Target IP>/anonymous
 ```
 
-After running the command, the file is retrieved locally.
-
 ![media](media/05.png)
 
-The file can then be viewed with `cat` to obtain the answer for the following task.
+The file can then be viewed with `cat` as shown below.
 
 ![media](media/06.png)  
 ![media](media/07.png)
@@ -128,13 +128,11 @@ This task begins by searching for binaries with the `SUID` bit set using the pro
 find / -perm -u=s -type f 2>/dev/null
 ```
 
-![media](media/15.png)
-
 Among the results, one entry stands out.
 
-![media](media/16.png)
+Running this binary and inspecting it with `strings` reveals a call to `curl` without an absolute path.
 
-After running the binary, the next step is to inspect it with `strings` to identify any useful information. In this case, the output shows a call to `curl` without an absolute path.
+![media](media/16.png)
 
 To locate the relevant line quickly:
 
@@ -154,5 +152,6 @@ After exporting the modified path and running the `SUID` binary, root access is 
 With elevated privileges, the root flag can be retrieved.
 
 ![media](media/19.png)
+
 
 ---
