@@ -19,7 +19,7 @@ Rooms are listed below by difficulty and then alphabetically within each categor
 - [TakeOver](https://github.com/Inv4riant/tryhackme-writeups/tree/main/TakeOver) - - - - - - - - - - - - - - - ->> `subdomain enumeration`, `web`
 
 ### Medium
-- Leveling up soon
+- [Watcher](https://github.com/Inv4riant/tryhackme-writeups/tree/main/Medium/Watcher) - - - - - - - - - - - - - - - ->> `boot2root`, `web exploitation`
 
 ### Hard
 - Challenge accepted… but not completed yet.
