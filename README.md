@@ -29,8 +29,11 @@ Rooms are listed below by difficulty and then alphabetically within each categor
 
 ---
   
-#### Disclaimer
+#### Disclaimers
 These write‑ups follow a general blueprint, but the structure evolves as I improve my workflow.  
 Because of that, some older notes will look different.  I don’t go back and re‑edit every document whenever I change the format.
+
+Rooms sometimes take me more than one session to finish, so the attacker and target IPs may vary between screenshots.    
+This is normal and doesn’t affect the accuracy of the walkthrough.
 
 ---
