@@ -19,7 +19,7 @@ gobuster dir -u <Target IP> -w /usr/share/wordlists/dirb/common.txt
 
 `nc - TCP/IP swiss army knife`
 ```
-nc -lvnp <Port>
+nc -nvlp <Port>
 ```
 > -l    listen mode, for inbound connects
 
