@@ -19,12 +19,12 @@ The objective of this room is to investigate a partially configured web service,
 I began with a standard `nmap` scan to identify open ports, running services, and default scripts:
 
 ```bash
-nmap -sV -sC <target IP
+nmap -sV -sC <target IP>
 ```
 
 ![media](media/01.png)
 
-The scan revealed a single open port: `HTTP (80)`. The service banner referenced `Fuel CMS`, which immediately suggested a web‑based content management system running on the target.
+The scan revealed a single open port: `HTTP (80)`, and the service banner referenced `Fuel CMS`, which immediately suggested a web‑based content management system running on the target.
 
 ![media](media/02.png)
 
@@ -32,9 +32,7 @@ Visiting the webpage confirmed this. It was the default `Fuel CMS` landing page,
 
 Scrolling through the page revealed setup instructions and configuration notes, which hinted that the installation might not be fully secured.
 
-One detail stood out: the documentation referenced the database configuration file located at `fuel/application/config/database.php`
-
-This suggested that sensitive information, such as credentials, might be stored there.
+One detail that stood out was the documentation referencing the database configuration file located at `fuel/application/config/database.php`. This suggested that sensitive information, such as credentials, might be stored there.
 
 ![db tut](media/03.png)
 
@@ -68,11 +66,10 @@ The script also included a proxy configuration line, which didn’t work in this
 ![proxy commented out](media/10.png)
 
 Running the script produced a shell, landing me in a session as the `www-data` user.
-
-![executing](media/11.png)     
+   
 ![prompt](media/12.png)
 
-### Privilege Escalation
+#### Privilege Escalation
 
 To make the session easier to work with, I opened a reverse shell back to my machine:
 
@@ -88,7 +85,8 @@ Unusually, it was located in `/home/www-data`.
 
 ![www-data user flag?](media/15.png)
 
-Earlier in the room, the `Fuel CMS` setup page mentioned the location of the database configuration file. Checking that directory now revealed stored credentials.
+Earlier in the room, the `Fuel CMS` setup page mentioned the location of the database configuration file.    
+Checking that directory now revealed stored credentials.
 
 ![pwd in /var/www/html/fuel/application/config](media/16.png)
 
@@ -109,5 +107,6 @@ I used `su` to switch to the `root` user, and the credentials worked.
 From there, I accessed the `root` flag in the `root` home directory.
 
 ![media](media/19.png)
+
 
 ---
