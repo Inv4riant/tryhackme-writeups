@@ -56,7 +56,7 @@ A message appeared, congratulating me for reaching that point, followed by what 
 
 The hint for this flag was: `zA = 'a'`. This suggested that the text was encoded using a custom cipher where each pair of characters determines how the second character is shifted based on the first.
 
-The cipher can be decoded using a small [python script]().
+The cipher can be decoded using a small [python script](https://github.com/Inv4riant/tryhackme-writeups/blob/main/Hard/Anonymous%20Playground/decypher.py).
 
 ![page with cypher](media/07.png)
 
@@ -180,3 +180,4 @@ This successfully opened a root shell, allowing me to access the final flag in `
 
 
 ---
+
