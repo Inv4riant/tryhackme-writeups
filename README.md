@@ -14,6 +14,7 @@ Rooms are listed below by difficulty and then alphabetically within each categor
 - [Archangel](https://github.com/Inv4riant/tryhackme-writeups/blob/main/Easy/Archangel/Archangel.md) - - - - - - - - - - - - - - - >> `boot2root`, `web exploitation`
 - [Brooklyn Nine Nine](https://github.com/Inv4riant/tryhackme-writeups/blob/main/Easy/Brooklyn%20Nine%20Nine/brooklyn99.md) - - - - - - - - - >> `boot2root`, `steganography`
 - [Compiled](https://github.com/Inv4riant/tryhackme-writeups/blob/main/Easy/Compiled/Compiled.md) - - - -  - - - - - - - - - - - >> `reverse engeneering`
+- [Crack The Hash](https://github.com/Inv4riant/tryhackme-writeups/tree/main/Easy/Crack%20the%20hash) - - - - - - - - - - -  ->> `hash cracking`
 - [CyberHeroes](https://github.com/Inv4riant/tryhackme-writeups/blob/main/Easy/CyberHeroes/CyberHeroes.md) - - - - - - - - - - - - - >> `login bypass`
 - [Ignite](https://github.com/Inv4riant/tryhackme-writeups/tree/main/Easy/Ignite) - - - - - - - - - - - - - - - - - ->> `boot2root`, `web`
 - [Neighbour](https://github.com/Inv4riant/tryhackme-writeups/blob/main/Easy/Neighbour/neighbour.md) - - - - - - - - - - - - - - ->> `web`
