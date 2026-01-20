@@ -24,7 +24,7 @@ websites that helped me thoughout this room:
 
 `48bb6e862e54f2a795ffc4e541caed4d`
 
-To begin, I created a file named `hash.txt` and inserted the provided hash onto it.
+To begin, I created a file named `hash.txt` and inserted the provided hash onto it.    
 To determine the likely hash format, I checked its length using `wc -c`.
 
 The output indicated `33` characters, which corresponds to 32 characters + newline, consistent with the length of an `MD5` hash.        
@@ -48,7 +48,7 @@ The hash was cracked immediately, revealing the plaintext value.
 
 `CBFDAC6008F9CAB4083784CBD1874F76618D2A97 `
 
-I replaced the previous hash in `hash.txt` and again used `wc -c` to determine its length.      
+I replaced the previous hash in `hash.txt`, and again used `wc -c` to determine its length.      
 The output returned `42` characters, which corresponds to a 40‑character `SHA‑1` hash plus newline. Based on this, I proceeded using the `SHA‑1` format.
 
 ![media](media/l1f2_1.png)
@@ -92,7 +92,7 @@ The plaintext was recovered immediately.
 
 This hash could not be reliably identified by length alone, so I compared its structure against the formats listed in the [Hashcat example database](https://hashcat.net/wiki/doku.php?id=example_hashes). The prefix `$2y$12$` matched the format used by `bcrypt`, a hashing algorithm designed to resist brute‑force attacks.
 
-The challenge description indicates that the expected answer consists of four characters `****`.        
+The challenge indicates that the expected answer consists of four characters `****`.        
 Since all answers in this room are known to appear in `rockyou.txt`, I created a reduced wordlist containing only entries of length four.
 
 This was done using:
@@ -109,9 +109,10 @@ With the filtered list prepared, I used hashcat in mode `3200` to attempt the cr
 hashcat -m 3200 hash.txt rockyou-4.txt
 ```
 
+![media](media/l1f4_3.png)  
+
 The reduced wordlist significantly improved performance, and the plaintext was recovered in approximately one minute.
 
-![media](media/l1f4_3.png)      
 ![media](media/l1f4_4.png)
 
 ##### hash 5
@@ -194,7 +195,7 @@ Looking it up, I found that the `$6$` prefix means it’s a `SHA‑512` hash. Th
 
 Since the answer for this challenge is shown as `******`, I assumed it was a 6‑character password.
 
-To speed things up, I created a filtered version of the `rockyou` list containing only 6‑character entries.
+To speed things up, I created a filtered version of the `rockyou.txt` list containing only 6‑character entries.
 
 ```bash
 awk 'length($0)==6' /usr/share/wordlists/SecLists/Passwords/Leaked-Databases/rockyou.txt > rockyou-6.txt
@@ -213,7 +214,7 @@ hashcat -m 1800 hash.txt rockyou-6.txt
 ![media](media/l2f3_2.png)
 
 After about 19 minutes (easily the longest crack so far) it finally returned the plaintext.      
-Using the full `rockyou` list would have taken much longer.
+Using the full `rockyou.txt` list would have taken much longer.
 
 ![media](media/l2f3_3.png)
 
@@ -243,3 +244,4 @@ It cracked in about 9 seconds, which wrapped up the room.
 
 
 ---
+
