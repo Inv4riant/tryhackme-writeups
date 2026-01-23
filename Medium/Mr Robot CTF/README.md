@@ -25,7 +25,8 @@ nmap <Target IP>
 
 ![simple scan with closed ports](media/01.png)
 
-The scan identified three ports: `22 (SSH)`, `80 (HTTP)`, and `443 (HTTPS)`, but all of them were closed.       
+The scan identified three ports: `22 (SSH)`, `80 (HTTP)`, and `443 (HTTPS)`, but all of them were closed.
+
 Since this can happen on first attempts or depending on timing, I followed up with a more thorough scan.
 
 ```bash
@@ -58,7 +59,7 @@ gobuster dir -u <Target IP> -w /usr/share/wordlists/dirb/common.txt -s "200" -b 
 ![gobuster header](media/05.png)      
 ![gobuster ports](media/06.png)
 
-I started checking the discovered paths.        
+Then, I started checking the discovered paths.        
 I looked through most of them, though only a few contained anything relevant.
 
 Visiting `/readme` produced the following message:
@@ -83,14 +84,11 @@ So I continued exploring the discovered directories and eventually reached `/rob
 
 The first thing that stood out in `robots.txt` was the first flag, which was accessible by appending the path directly to the URL.
 
-The file also referenced `fsocity.dic`, which I assumed to be a dictionary‑style wordlist.
-
-I navigated to `/key-1-of-3.txt` and retrieved the first flag.
-
 ![first flag](media/13.png)
 
-Next, I downloaded `fsocity.dic` to my machine using `wget`.        
-A quick check with `wc -c` confirmed it was indeed a dictionary file, a long and very messy one.
+The file also referenced `fsocity.dic`, which appeared to be a wordlist. 
+
+I downloaded it to my machine using `wget` for further inspection, and a quick check with `wc -c` confirmed it was indeed a dictionary file, a long and very messy one.
 
 ![wgetting fsicity.dic + wc -c](media/14.png)
 
@@ -103,7 +101,7 @@ sort fsocity.dic | uniq > sorted.dic
 
 ![sorting](media/15.png)
 
-After sorting, the file became significantly smaller, which means it’s much faster to use for brute‑forcing or any other wordlist‑based attack.
+After sorting, the file became significantly smaller, which meant it would be much faster to use for brute‑forcing or any other wordlist‑based attack.
 
 ![wc -c comparing both](media/16.png)
 
@@ -125,7 +123,7 @@ With Burp open, I enabled `Proxy → Intercept` and submitted a bogus login atte
 This captured the request parameters:
 
 ```bash
-log=tests&pwd=teste
+log=teste&pwd=teste
 ```
 
 These fields are exactly what `Hydra` needs to build its brute‑force requests.
@@ -235,5 +233,6 @@ Using the method described there granted me a root shell.
 With full root access, I navigated to `/root` and retrieved the final flag.
 
 ![media](media/35.png)
+
 
 ---
