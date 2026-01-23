@@ -21,6 +21,7 @@ Rooms are listed below by difficulty and then alphabetically within each categor
 - [TakeOver](https://github.com/Inv4riant/tryhackme-writeups/tree/main/Easy/TakeOver) - - - - - - - - - - - - - - - ->> `subdomain enumeration`, `web`
 
 ### Medium
+- [Mr Robot CTF](https://github.com/Inv4riant/tryhackme-writeups/tree/main/Medium/Mr%20Robot%20CTF)  - - - - - - - - - - - - >> `boot2root`, `web`
 - [Watcher](https://github.com/Inv4riant/tryhackme-writeups/tree/main/Medium/Watcher) - - - - - - - - - - - - - - - ->> `boot2root`, `web exploitation`
 
 ### Hard
