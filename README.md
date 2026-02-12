@@ -18,6 +18,7 @@ Rooms are listed below by difficulty and then alphabetically within each categor
 - [CyberHeroes](https://github.com/Inv4riant/tryhackme-writeups/blob/main/Easy/CyberHeroes/CyberHeroes.md) - - - - - - - - - - - - - >> `login bypass`
 - [Ignite](https://github.com/Inv4riant/tryhackme-writeups/tree/main/Easy/Ignite) - - - - - - - - - - - - - - - - - ->> `boot2root`, `web`
 - [Neighbour](https://github.com/Inv4riant/tryhackme-writeups/blob/main/Easy/Neighbour/neighbour.md) - - - - - - - - - - - - - - ->> `web`
+- [Soupedecode 01](https://github.com/Inv4riant/tryhackme-writeups/tree/main/Easy/Soupedecode%2001)- - - - - - - - - - ->> `windows`, `smb`
 - [TakeOver](https://github.com/Inv4riant/tryhackme-writeups/tree/main/Easy/TakeOver) - - - - - - - - - - - - - - - ->> `subdomain enumeration`, `web`
 
 ### Medium
