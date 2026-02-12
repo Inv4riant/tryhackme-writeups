@@ -242,6 +242,8 @@ Write access to `C$` is a great setup for lateral movement or full system compro
 
 ![FileServer does have privs](media/27.png)
 
+#### Privilege Escalation
+
 After some research, I decided to use `Impacket’s psexec.py`, which creates a service on the target system and spawns a SYSTEM‑level shell if the provided credentials are valid.
 
 ```bash
@@ -259,3 +261,4 @@ To confirm the level of access, I checked the current user, and as expected, the
 ![nt authority/system](media/30.png)
 
 ---
+
