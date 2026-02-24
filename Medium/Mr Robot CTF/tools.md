@@ -3,19 +3,20 @@
 ---
 
 #### gobuster
-`gobuster - Directory/file & DNS busting tool written in Go`
+
 ```
 gobuster dir -u <Target IP> -w /usr/share/wordlists/dirb/common.txt -s "200" -b ""
 ```
 
-> dir - the classic directory brute-forcing mode
+> dir - Performs brute‑force discovery of directories and files on a web server.
 
 >-u, --url string  
 
 >-w, --wordlist string
 
 >-s string
->>Positive status codes (dir mode only) (default "200,204,301,302,307")
+>>Specifies which HTTP status codes should be treated as valid hits in directory mode.
+(Default: "200,204,301,302,307")
 
 >-b 
 >> blacklist (was removed but gobuster still expects it)
@@ -23,20 +24,20 @@ gobuster dir -u <Target IP> -w /usr/share/wordlists/dirb/common.txt -s "200" -b 
 ---
 
 #### hashcat
-`Crack password hashes using various methods`
+
 
 ```
 hashcat -m 0 hash.txt /usr/share/wordlists/rockyou.txt
 ```
 
 > -m, --hash-type=NUM
->> Hash-type ID (see hashcat --help for 350+ types like 0=MD5, 1000=NTLM)
+>> Specifies the hash algorithm by its ID number.
 
 ---
 
 #### hydra
 
-`hydra - a very fast network logon cracker which supports many different services`
+
 
 ```
 hydra -L sorted.dic -p teste <Target IP> http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^:F=Invalid username"
@@ -46,16 +47,16 @@ hydra -L sorted.dic -p teste <Target IP> http-post-form "/wp-login.php:log=^USER
 hydra -l ELLIOT -P sorted.dic <Target IP> http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^:F=The password you entered"
 ```
 > -l LOGIN or -L FILE  
->>login with LOGIN name, or load several logins from FILE
+>>Use a single username, or load a list of usernames from a file
 
 >-p PASS
->>or -P FILE try password PASS, or load several passwords from FILE
+>>Try one specific password, or supply a file containing multiple passwords.
 
 ---
 
 #### nmap
 
-`nmap - Network exploration tool and security / port scanner`
+
 ```
 nmap <Target IP>
 ```
@@ -64,8 +65,9 @@ nmap <Target IP>
 nmap -sV -sC <Target IP>
 ```
 
->-sC: equivalent to --script=default
+>-sC: Runs the default script set (same as --script=default).
 
->-sV: Probe open ports to determine service/version info
+>-sV: Examines open ports to identify the service and version running on them.
+
 
 ---
