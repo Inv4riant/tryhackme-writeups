@@ -12,25 +12,27 @@ gobuster dir -u https://futurevera.thm -k -w /usr/share/wordlists/dirb/common.tx
 gobuster vhost -u https://futureeva.thm --append-domain -k -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.txt
 ```
 
-> dir - the classic directory brute-forcing mode
+> dir - Performs brute‑force discovery of directories and files on a web server.
 
->vhost - virtual host brute-forcing mode - not the same as DNS
+>vhost - Attempts to identify virtual hosts by testing hostnames against the target.
+(Different from DNS enumeration.)
 
 >-u, --url string  
 
 >-w, --wordlist string
 
 >-k
->> Skip TLS certificate verification
+>> Ignores TLS/SSL certificate validation.
 
 >--append-domain, --ad
->> Append main domain from URL to words from wordlist. Otherwise the fully qualified domains need to be specified in the wordlist. (default : false)
+>> Adds the main domain from the target URL to each word in the wordlist.
+Without this, the wordlist must contain full domain names. (Default: false)
 
 ---
 
 #### nmap
 
-`nmap - Network exploration tool and security / port scanner`
+
 ```
 nmap futurevera.thm
 ```
