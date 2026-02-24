@@ -4,20 +4,20 @@
 
 #### nmap
 
-`nmap - Network exploration tool and security / port scanner`
+
 ```
 nmap -sV -sC <target IP
 ```
 
->-sC: equivalent to --script=default
+>-sC: Runs the default script set (same as --script=default).
 
->-sV: Probe open ports to determine service/version info
+>-sV: Examines open ports to identify the service and version running on them.
 
 ---
 
 #### searchploit
 
-`SearchSploit ‐ Exploit Database Archive Search`
+
 
 ```
 searchploit <Term>
@@ -28,6 +28,7 @@ searchsploit -m <Exploit Number>
 ```
 
 >-m, --mirror
->> Copies (mirrors) the selected exploit file to the current working directory.
+>> Copies the chosen exploit file into your current directory for easier access or modification.
+
 
 ---
