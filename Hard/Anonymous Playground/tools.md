@@ -4,12 +4,12 @@
 
 #### gobuster
 
-`gobuster - Directory/file & DNS busting tool written in Go`
+
 
 ```
 gobuster -dir -u <Target IP> -w /usr/share/wordlists/dirb/big.txt
 ```
-> dir - the classic directory brute-forcing mode
+> dir - Performs brute‑force discovery of directories and files on a web server.
 
 >-u, --url string  
 
@@ -19,7 +19,7 @@ gobuster -dir -u <Target IP> -w /usr/share/wordlists/dirb/big.txt
 
 #### nmap
 
-`nmap - Network exploration tool and security / port scanner`
+
 
 ```
 nmap <Target IP>
@@ -28,28 +28,29 @@ nmap <Target IP>
 ---
 #### radare2
 
-`Reverse engineer and analyze binaries`
+
 
 ```
 r2 ./hacktheworld
 ```
 
 > aaa 
->> preform deeper analysis, most common use
+>> Performs an in‑depth analysis of the binary.
 
 > aaaa
->> same as aaa but adds a bunch of experimental iterations
+>> Extends aaa with additional, more experimental analysis passes.
 
 > afl
->> list funcions
+>> Lists all detected functions within the binary.
 
 > axt
->> find data/code rferences to this address
+>> Shows code or data references that point to the specified address.
 
 > pdf
->> disassmeble function in a linear way (see pdfr)
+>> Disassembles the current function in a straightforward, linear format.
 
 > s < addr>
->> seek to address
+>> Moves the seek pointer to the given address.
+
 
 ---
