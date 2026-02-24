@@ -43,7 +43,7 @@ nmap -sVC -p 53,88,135,139,189,445,464,593,636,3268,3269,3389,5985,9389,5985,938
 ---
 
 #### netexec
-`A swiss army knife for pentesting networks`
+
 
 ```
 nxc smb <Domain Name> -u guest -p ''
@@ -80,4 +80,5 @@ nxc ldap $TARGET -u <username> -p <password> --kerberoasting khash.txt
 >> Enumerates domain users and groups by cycling through Relative Identifiers (RIDs).
 
 ---
+
 
