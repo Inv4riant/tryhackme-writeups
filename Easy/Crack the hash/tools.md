@@ -3,7 +3,7 @@
 ---
 
 #### hashcat
-`Crack password hashes using various methods`
+
 
 ```
 hashcat -m 0 hash.txt /usr/share/wordlists/SecLists/Passwords/Leaked-Databases/rockyou.txt
@@ -43,9 +43,10 @@ hashcat -m 160 hash.txt /usr/share/wordlists/SecLists/Passwords/Leaked-Databases
 
 
 > -m, --hash-type=NUM
->> Hash-type ID (see hashcat --help for 350+ types like 0=MD5, 1000=NTLM)
+>> Specifies the hash algorithm by its ID number.
 
 > -r, --rules-file=FILE
->> Load rules from FILE for mutations
+>> Loads a rules file to apply word‑mutation rules during dictionary attacks.
+
 
 ---
