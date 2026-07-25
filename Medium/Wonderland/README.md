@@ -225,7 +225,7 @@ I checked GTFOBins, and looking up perl there showed me a one‑liner that uses 
 
 ![gtfobins](media/44.png)
 
-Then, I applied it
+Then, I applied it.
 
 ![exploiting perl](media/45.png)
 
