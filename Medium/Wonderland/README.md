@@ -26,13 +26,13 @@ For full coverage, I scanned all ports and enabled default scripts and version d
 nmap -sVC &TARGET -p-
 ```
 
-The results showed two key services exposed: A web server running on the target, and an `SSH` service available for remote access.
+The results showed two key services exposed: A web server and `SSH`.
 
 Both findings suggested that the initial foothold would likely come from the web application, with `SSH` becoming relevant once valid credentials were obtained.
 
 ![nmap scan results](media/01.png)
 
-Since the web server became the primary entry point for further enumeration and potential exploitation, I navigated to it first.
+Since the web server was the primary entry point for further enumeration and potential exploitation, I navigated to it first.
 
 ![the website](media/02.png)
 
@@ -62,7 +62,7 @@ Taking the hint, I ran `gobuster` again, this time targeting the `/r` path.
 gobuster dir -u $TARGET/r -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 ```
 
-This enumeration revealed the directory `/a`, appended to the existing `/r` path.
+This enumeration revealed the directory `/a`.
 
 ![gobuster /r 1](media/08.png)      
 ![gobuster /r 2](media/09.png)
@@ -77,7 +77,7 @@ Following the hint on `/r/a`, I continued the pattern by running `gobuster` agai
 
 From this point forward, the process repeated several times, each iteration revealing the next letter in the sequence. Eventually, the full path spelled out `/r/a/b/b/i/t`.
 
-To avoid cluttering the write‑up with identical commands, here’s an example of the enumeration step I repeated for each newly discovered directory:
+To avoid cluttering the write‑up with meaningless text where I say the same thing over and over, here’s everything I did until getting to `/r/a/b/b/i/t`:
 
 ```
 gobuster dir -u $TARGET/r/a -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
@@ -141,9 +141,9 @@ The output revealed that the user alice is allowed to run the following command 
 
 ![media](media/24.png)
 
-I inspected `walrus_and_the_carpenter.py` with `cat` to understand how it behaved when executed.
+I inspected `walrus_and_the_carpenter.py` in order understand how it behaved when executed.
 
-Turns out that the script’s main purpose is simply to output a randomly chosen part of the poem each time it’s executed.
+Turns out that the script’s main purpose is to simply to output a randomly chosen part of the poem each time it ran.
 
 ![poem](media/26.png)      
 ![poem 2](media/27.png)      
@@ -152,21 +152,21 @@ Turns out that the script’s main purpose is simply to output a randomly chosen
 ![so many lines](media/30.png)      
 ![much poem](media/31.png)      
 
-To escalate from `alice` to the `rabbit` user, I took advantage of how Python loads modules.        
+To escalate from `alice` to `rabbit`, I took advantage of how Python loads modules.        
 The script imports the `random` module, and because `alice` is allowed to run this script as `rabbit`, anything the script imports becomes a potential way to execute code with `rabbit’s` privileges.
 
-Since the script imports `random`, all I had to do was create my own `random.py` in the same directory. Inside it, I wrote a tiny payload that imports the `os module` and spawns a shell. 
+All I had to do was create my own `random.py` in the same directory. Inside it, I wrote a tiny payload that imports the `os module` and spawns a shell. 
 
 ![the random.py payload thing](media/32.png)
 
-I then simply executed: 
+I could then become `rabbit` by simply executing: 
 ```
 sudo -u rabbit /usr/bin/python3.6 /home/alice/walrus_and_the_carpenter.py
 ```
 
 ![alice becomes rabbit](media/33.png)
 
-I then moved into `/home/rabbit` to see what I could find. The most interesting item there was a binary named `TeaParty`, which belonged to the `hatter` user, suggesting it might be the next escalation point.
+Finally as `rabbit`, i enumerated `/home/rabbit` to see what I could find. The most interesting item there was a binary named `TeaParty`, which belonged to the `hatter` user, suggesting it might be the next escalation point.
 
 Running the binary printed a message saying that the Mad Hatter would arrive in one hour from the moment the program was executed.
 
@@ -174,11 +174,11 @@ Running the binary printed a message saying that the Mad Hatter would arrive in 
 
 ![running the tea party](media/35.png)
 
-I tried running `strings` on it, but in this case, it didn’t reveal anything useful.
+I tried running `strings` on it, but in this case, it didn’t reveal anything useful. This machine did not have strings...
 
 ![strings does not work](media/36.png)
 
-I tried inspecting it with cat instead. This time, the output was interesting. The binary was actually calling an external system command:
+I then tried inspecting it with cat instead. This time, the output was interesting. The binary was actually calling an external system command:
 
 ![cat on teaparty](media/37.png)
 
@@ -197,7 +197,7 @@ export $PATH=/home/rabbit:$PATH
 
 ![that, but in a png](media/39.png)
 
-Then a fake date executable was created inside `/home/rabbit`, and added a small payload that simply launched a shell.
+Then a fake date executable was created inside `/home/rabbit`, and to it, I added a small payload that simply launched a shell.
 
 ```
 touch date && echo '#!/bin/bash' > date && echo '/bin/bash' >> date
@@ -207,7 +207,7 @@ And finally, gave it execute permission using `chmod +x`.
 
 ![that.](media/40.png)
 
-And just like that, running the TeaParty program elevated me from rabbit to hatter.
+And just like that, running the `TeaParty` program elevated me from rabbit to hatter.
 
 ![becoming hatter](media/41.png)
 
@@ -225,9 +225,7 @@ I checked GTFOBins, and looking up perl there showed me a one‑liner that uses 
 
 ![gtfobins](media/44.png)
 
-Then applied it
-
-I applied the exact command shown there.
+Then, I applied it
 
 ![exploiting perl](media/45.png)
 
